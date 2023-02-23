@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: forgerock-config
+data:
+  SYMBOL: MSFT
+  NUM_DAYS: "7"

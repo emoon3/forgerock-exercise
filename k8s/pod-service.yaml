@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: forgerock
+  labels:
+    appname: forgerock
+spec:
+  containers:
+  - name: forgerock
+    image: geoj/forgerock:k8s
+    imagePullPolicy: Always
+    env:
+      - name: API_KEY
+        valueFrom:
+          secretKeyRef:
+            name: apikey
+            key: API_KEY
+      - name: NUM_DAYS
+        valueFrom:
+          configMapKeyRef:
+            name: forgerock-config
+            key: NUM_DAYS
+      - name: SYMBOL
+        valueFrom:
+          configMapKeyRef:
+            name: forgerock-config
+            key: SYMBOL
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: forgerock-service
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    appname: forgerock
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 3000
+    nodePort: 30036
