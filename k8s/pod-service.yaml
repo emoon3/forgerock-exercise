@@ -32,11 +32,10 @@ metadata:
   name: forgerock-service
   namespace: default
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     appname: forgerock
   ports:
   - protocol: TCP
-    port: 8080
-    targetPort: 3000
-    nodePort: 30036
+    port: 3000
+

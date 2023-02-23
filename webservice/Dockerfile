@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM --platform=linux/amd64 alpine:3.16
 WORKDIR /app
 COPY main /app
 ENV SYMBOL=MSFT
